@@ -1,0 +1,79 @@
+{% load staticfiles %}
+{% if request.session.status %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+<table align="center">
+    <tr>
+        <th>{% include 'os_agent_templates/os_agent_menu.html' %}</th>
+    </tr>
+</table>
+<table align="center" border="2" width="320">
+    <tr>
+        <th>
+            <form action="/osagent/agentpropertysave/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <table>
+                <tr>
+                   <tr><th><h2>Add New Property </h2></th></tr>
+{#                    <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="number" placeholder="Property No" name="p1" required ></th></tr>#}
+                    <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="text" placeholder="Name" name="p2" required ></th></tr>
+                    <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="text" placeholder="Location" name="p3" required ></th></tr>
+                    <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="number" placeholder="Size (width x length)" name="p4" required ></th></tr>
+                    <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="decimal" placeholder="Price (per 1 yrd)" name="p5" required ></th></tr>
+                    <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="text" placeholder="Facing" name="p6" required ></th></tr>
+                    <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="text" placeholder="Comments..." name="p7" required ></th></tr>
+                    <tr><th><input type="file" name="p8" required ></th></tr>
+                    <tr align="center"><th><button type="submit" class="btn btn-success">SAVE</button></th></tr>
+            </table>
+            </form>
+        </th>
+    </tr>
+</table>
+<br><br>
+
+            {%  for x in data %}
+                <table align="center" border="2">
+
+                    <tr><th>Name:</th><th>{{ x.name }}</th><th rowspan="7"><img src="{{ x.photo.url }}" width="350" height="400"></th></tr>
+                    <tr><th>Location:</th><th>{{ x.location }}</th></tr>
+                    <tr><th>Size:</th><th>{{ x.size }}</th></tr>
+                    <tr><th>Price:</th><th>{{ x.price }}</th></tr>
+                    <tr><th>Facing:</th><th>{{ x.facing }}</th></tr>
+                    <tr><th>Comments:</th><th>{{ x.comment }}</th></tr>
+                    <tr><th>POST DATE :</th><th width="150">{{ x.add_date }}</th></tr>
+                <tr align="center"><th width="150" align="center">
+                    <a href="">
+                                   <img src="{% static 'images/update.png' %}">
+                               </th></a>
+                    <th width="150">
+                        <a href="/osagent/agentdeleteconformation{{ x.no }}/">
+                            <img src="{% static 'images/delete-button.png' %}">
+                        </a>
+                    </th>
+                </tr>
+                </table>
+            {% endfor %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% else %}
+    <center>
+        <font color="red" size="5" face="Arial">
+            <h1>Please Login</h1>
+        </font>
+    </center>
+{% endif %}

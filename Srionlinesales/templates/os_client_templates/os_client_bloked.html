@@ -1,0 +1,59 @@
+{% load staticfiles %}
+{% if request.session.status %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+<table align="center">
+    <tr>
+        <th>{% include 'os_client_templates/os_client_menu.html' %}</th>
+        </tr>
+</table>    {%  if data %}
+            {%  for x in data %}
+                <table align="center" border="2">
+                <tr><th>Name:</th><th>{{ x.property_no.name }}</th><th rowspan="7"><img src="{{ x.property_no.photo.url }}" width="350"height="350"></th></tr>
+                    <tr><th>Location:</th><th>{{ x.property_no.location }}</th></tr>
+                    <tr><th>size</th><th>{{ x.property_no.size }}</th></tr>
+                    <tr><th>Price:</th><th>{{ x.property_no.price }}</th></tr>
+                    <tr><th>Facing:</th><th>{{ x.property_no.facing }}</th></tr>
+                    <tr><th>Commnet:</th><th>{{ x.property_no.comment }}</th></tr>
+                    <tr><th>Post Date</th><th>{{ x.property_no.add_date }}</th></tr>
+                        <tr><th><div style="text-align: center;">
+                            {% if  x.property_no.status == "post"%}
+                                <a href="/osclient/unblock/?uname={{ request.session.username }}&no={{ x.property_no.no }}">
+                                       UN-BLOCK PROPERTY
+                                </a>
+                            {% else %}
+                                PROPERTY SOLD
+                            {% endif %}
+                        </div>
+                </th></tr>
+                </table>
+            {% endfor %}
+            {% else %}
+                <h2 align="center">No Bloked Properties</h2></span>
+            {% endif %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+{% else %}
+    <center>
+        <font color="red" size="5" face="Arial">
+            <h1>Please Login</h1>
+        </font>
+    </center>
+{% endif %}

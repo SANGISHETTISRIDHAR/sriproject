@@ -1,0 +1,59 @@
+{%  load staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+<table align="center">
+    <tr>
+        <th>{% include 'os_main_templates/main_title.html' %}</th>
+    </tr>
+</table>
+
+<table align="center" border="3">
+    <tr>
+        <th>
+            <form action="/osclient/clientsavedata/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+            <table align="center" border="0">
+                <tr><th><h2>Client register page</h2></th></tr>
+                <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque" type="text" placeholder="Name" required name="c1"></th></tr>
+                <tr><th><input type="text" placeholder="Username" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque" name="c2"></th></tr>
+                <tr><th><input type="password" placeholder="Password" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque" name="c3"></th></tr>
+                <tr><th><input type="number" maxlength="10" placeholder="Contact No" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque" name="c4"></th></tr>
+                <tr><th><textarea maxlength="500" typeof="text" placeholder="Address" required name="c5" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque" ></textarea></th></tr>
+                <tr><th><input type="file" name="c6" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"></th></tr>
+                <tr align="center"><th><button style="width: 150px" type="submit"class="btn btn-primary">Save</button> </th></tr>
+            </table>
+            </form>
+        </th>
+    </tr>
+</table>
+<table align="right">
+    <tr><th><h3><a href="/osclient/clienthome/">Click Here</a>to Login </h3></th></tr>
+</table>
+
+
+                          {% if message %}
+
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong> {{ message }} </strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+                            {% endif %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

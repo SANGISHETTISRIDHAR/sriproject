@@ -1,0 +1,70 @@
+{%  load staticfiles %}
+{% if request.session.status %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+<table align="center">
+    <tr>
+        <th>
+            {% include 'os_admin_templates/os_admin_menu.html' %}
+        </th>
+    </tr>
+</table>
+<table align="center" border="3">
+<tr><th>
+    <form action="/osadmin/savedata/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <table align="center" border="0" bgcolor="#ff7f50">
+        <tr align="center"><th colspan="2"> AGENT REGISTATION</th></tr>
+        <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque" type="number" placeholder="NO" required name="agentno" ></th></tr>
+        <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque" type="text" placeholder="NAME" required name="agentname"></th></tr>
+        <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color:bisque"  type="text" placeholder="USERNAME" required name="agentusername"></th></tr>
+        <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="background-color: bisque"  type="password" placeholder="PASSWORD" required name="agentpassword"></th></tr>
+        <tr><th><input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"  style="background-color: bisque" type="number" placeholder="CONTACT NO" required maxlength="10" name="agentcontactno"></th></tr>
+        <tr><th><textarea maxlength="300" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"textarea style="background-color: bisque"  placeholder="ADDRESS" required name="agentadrs"></textarea></th></tr>
+        <tr><th>PHOTO &nbsp<input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"style="background-color: bisque"  type="file" name="agentphoto"></th></tr>
+        <tr align="center"><th><button type="submit" class="btn btn-primary">SAVE</button></th></tr>
+    </table>
+        </form>
+</th>
+</tr>
+</table>
+<br>
+<br>
+  {% for x in data %}
+<table bgcolor="#7fffd4"  align="center" border="3">
+    <tr><th>IDNO :{{ x.no }}</th><th rowspan="6"><img src="{{ x.photo.url }}" width=200" height="200"></th></tr>
+    <tr><th>NAME :{{x.name}}</th></tr>
+    <tr><th>USERNAME :{{ x.agent_un }}</th></tr>
+    <tr><th>PASSWORD :{{ x.agent_pwd }}</th></tr>
+    <tr><th>CONTACT :{{ x.contactno }}</th></tr>
+    <tr><th>ADDRESS :{{ x.address }}</th></tr>
+    <tr align="center">
+        <th colspan="2">
+            <a href="/osadmin/agentdelete/?idno={{ x.no }}"><button type="submit" class="btn btn-danger">Delete</button></a>
+    </tr>
+</table>
+      <br>
+    {% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% else %}
+    <center>
+        <font color="red" size="5" face="Arial">
+            <h1>Please Login</h1>
+        </font>
+    </center>
+{% endif %}
